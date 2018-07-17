@@ -39,8 +39,9 @@ public class SocketServer {
             //绑定监听端口
             ChannelFuture channelFuture = serverBootstrap.bind(8899).sync();
             channelFuture.channel().closeFuture().sync();
-        }
-        finally {
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
             parentGroup.shutdownGracefully();
             childGroup.shutdownGracefully();
         }

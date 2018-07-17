@@ -2,6 +2,7 @@ package bytebuf;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import org.junit.Test;
 
 /**
  * @ProjectName: netty-restful-server
@@ -22,9 +23,18 @@ public class ByteBufT {
     
         byteBuf.discardReadBytes();
         byteBuf.discardSomeReadBytes();
-    
+        byteBuf.refCnt();
         
     
+    }
+    
+    
+    @Test
+    public void refCnt(){
+        ByteBuf byteBuf =Unpooled.buffer();
+        byteBuf.slice();
+        byteBuf.release();
+        assert byteBuf.refCnt()==1;
     }
     
 }
